@@ -1,42 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, FormGroup, FormControl } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import "./Login.css";
 
-interface Props {}
+type FormData = {
+  username: string;
+  password: string;
+};
 
-export default function Login(props: Props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting }
+  } = useForm<FormData>();
 
-  function validateForm() {
-    return username.length > 0 && password.length > 0;
-  }
-
-  function handleSubmit(event: any) {
-    event.preventDefault();
-  }
+  const onSubmit = handleSubmit(({ username, password }) => {
+    console.log({ username, password });
+  });
 
   return (
     <div className="Login">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <FormGroup controlId="username">
           <FormControl
             autoFocus
-            onChange={(e: any) => setUsername(e.target.value)}
             placeholder="username"
+            name="username"
             type="text"
-            value={username}
+            ref={register}
           />
         </FormGroup>
         <FormGroup controlId="password">
           <FormControl
-            onChange={(e: any) => setPassword(e.target.value)}
             placeholder="password"
+            name="password"
             type="password"
-            value={password}
+            ref={register}
           />
         </FormGroup>
-        <Button block disabled={!validateForm()} type="submit">
+        <Button block disabled={isSubmitting} type="submit">
           Login
         </Button>
       </form>
