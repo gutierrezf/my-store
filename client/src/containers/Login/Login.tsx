@@ -2,7 +2,7 @@ import React from "react";
 import { Button, FormGroup, FormControl } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import gql from "graphql-tag";
-import { useMutation } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 import "./Login.css";
 
 type FormData = {
@@ -37,10 +37,8 @@ export default function Login() {
   const onSubmit = handleSubmit(async ({ username, password }) => {
     const result = await login({
       variables: {
-        input: {
-          username,
-          password
-        }
+        email: username,
+        password
       }
     });
 

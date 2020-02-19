@@ -6,6 +6,7 @@ import connectSqlite3 from "connect-sqlite3";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import resolvers from "./resolvers";
+import cors from "cors";
 
 // I like to use redis for this: https://github.com/tj/connect-redis
 const SQLiteStore = connectSqlite3(session);
@@ -31,22 +32,6 @@ const SQLiteStore = connectSqlite3(session);
     })
   );
 
-  app.use(function(_, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token"
-    );
-
-    // res.header('Access-Control-Allow-Origin: *');
-    res.header(
-      "Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS"
-    );
-
-    next();
-  });
-
   // get options from ormconfig.js
   const dbOptions = await getConnectionOptions(
     process.env.NODE_ENV || "development"
@@ -61,7 +46,14 @@ const SQLiteStore = connectSqlite3(session);
     context: ({ req, res }) => ({ req, res })
   });
 
-  apolloServer.applyMiddleware({ app, cors: true });
+  app.use(
+    cors({
+      origin: (_, cb) => cb(null, true),
+      credentials: true
+    })
+  );
+
+  apolloServer.applyMiddleware({ app, cors: false, path: "/graphql" });
   const port = process.env.PORT || 4000;
   app.listen(port, () => {
     console.log(`server started at http://localhost:${port}/graphql`);

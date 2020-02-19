@@ -49,7 +49,6 @@ export class AuthResolver {
     @Arg("input") { email, password }: AuthInput,
     @Ctx() ctx: MyContext
   ): Promise<UserResponse> {
-    console.log("hola");
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
