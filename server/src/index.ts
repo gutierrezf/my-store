@@ -31,6 +31,22 @@ const SQLiteStore = connectSqlite3(session);
     })
   );
 
+  app.use(function(_, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token"
+    );
+
+    // res.header('Access-Control-Allow-Origin: *');
+    res.header(
+      "Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS"
+    );
+
+    next();
+  });
+
   // get options from ormconfig.js
   const dbOptions = await getConnectionOptions(
     process.env.NODE_ENV || "development"
@@ -45,7 +61,7 @@ const SQLiteStore = connectSqlite3(session);
     context: ({ req, res }) => ({ req, res })
   });
 
-  apolloServer.applyMiddleware({ app, cors: false });
+  apolloServer.applyMiddleware({ app, cors: true });
   const port = process.env.PORT || 4000;
   app.listen(port, () => {
     console.log(`server started at http://localhost:${port}/graphql`);
