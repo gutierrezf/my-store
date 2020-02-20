@@ -1,26 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Nav, Navbar, Container } from "react-bootstrap";
-
+import { Navbar, Container } from "react-bootstrap";
 import Routes from "./Routes";
+import { useUserContext } from "./context/userContext";
 import "./App.css";
+import Login from "./containers/Login";
 
-function App() {
+function renderBody() {
   return (
-    <Container className="App p-0" fluid={true}>
+    <>
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand>
           <Link to="/">MyStore</Link>
         </Navbar.Brand>
-        <Nav className="justify-content-end w-100">
-          <Nav.Item>
-            <Link className="nav-link" to="/login">
-              Login
-            </Link>
-          </Nav.Item>
-        </Nav>
       </Navbar>
       <Routes />
+    </>
+  );
+}
+
+function App() {
+  const { user } = useUserContext();
+
+  console.log({ user });
+  return (
+    <Container className="App p-0" fluid={true}>
+      {user.email ? renderBody() : <Login />}
     </Container>
   );
 }

@@ -3,6 +3,9 @@ import { Button, FormGroup, FormControl } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
+
+import { useUserContext } from "../../context/userContext";
+
 import "./Login.css";
 
 type FormData = {
@@ -32,6 +35,8 @@ export default function Login() {
     formState: { isSubmitting }
   } = useForm<FormData>();
 
+  const { setUser } = useUserContext();
+
   const [login] = useMutation(mutation);
 
   const onSubmit = handleSubmit(async ({ username, password }) => {
@@ -43,6 +48,7 @@ export default function Login() {
     });
 
     console.log(result);
+    setUser(result.data.login.user);
   });
 
   return (
