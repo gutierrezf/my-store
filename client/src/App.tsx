@@ -20,12 +20,11 @@ function renderBody() {
 }
 
 function App() {
-  const { user } = useUserContext();
+  const { isLoggedIn } = useUserContext();
 
-  console.log({ user });
   return (
     <Container className="App p-0" fluid={true}>
-      {user.email ? renderBody() : <Login />}
+      {isLoggedIn() ? renderBody() : <Login />}
     </Container>
   );
 }

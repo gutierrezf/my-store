@@ -1,25 +1,12 @@
-import { useEffect, useReducer } from "react";
+import { useState } from "react";
 import constate from "constate";
+import { IUser } from "../interfaces";
 
-function useUserSate({ initialState = false }) {
-  const reducer = (user: any, newUser: any) => {
-    if (newUser === null) {
-      localStorage.removeItem("userData");
-      return initialState;
-    }
-    return { ...user, ...newUser };
-  };
+function useUserSate({ initialState = null }) {
+  const [user, setUser] = useState<IUser | null>(initialState);
+  const isLoggedIn = () => Boolean(user);
 
-  const storedData = localStorage.getItem("userData") || "{}";
-  const localState = JSON.parse(storedData);
-
-  const [user, setUser] = useReducer(reducer, localState || initialState);
-
-  useEffect(() => {
-    localStorage.setItem("userData", JSON.stringify(user));
-  }, [user]);
-
-  return { user, setUser };
+  return { user, setUser, isLoggedIn };
 }
 
 const [UserProvider, useUserContext] = constate(useUserSate);

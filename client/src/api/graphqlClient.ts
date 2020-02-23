@@ -8,7 +8,7 @@ const client = new ApolloClient({
   cache,
   link: new HttpLink({
     credentials: "include",
-    uri: "https://ad526c35.ngrok.io/graphql"
+    uri: "http://localhost:4000/graphql"
   })
 });
 
