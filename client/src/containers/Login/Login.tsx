@@ -2,11 +2,13 @@ import React from "react";
 import { Button, FormGroup, FormControl } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import FadeIn from "react-fade-in";
 
 import { LOGIN_MUTATION, ME_QUERY } from "./graphql";
 import { useUserContext } from "../../context/userContext";
 import { IMe, IUserLogin } from "../../interfaces";
 import "./Login.css";
+import Loading from "../../components/Loading";
 
 type FormData = {
   username: string;
@@ -24,8 +26,7 @@ export default function Login() {
   const [login] = useMutation<IUserLogin>(LOGIN_MUTATION);
   const { loading, data: userData } = useQuery<IMe>(ME_QUERY);
 
-  // TODO: add a loading animation
-  if (loading) return <h1>loading</h1>;
+  if (loading) return <Loading />;
 
   if (userData?.me) {
     setUser(userData.me);
@@ -47,26 +48,28 @@ export default function Login() {
   return (
     <div className="Login">
       <form onSubmit={onSubmit}>
-        <FormGroup controlId="username">
-          <FormControl
-            autoFocus
-            placeholder="username"
-            name="username"
-            type="text"
-            ref={register}
-          />
-        </FormGroup>
-        <FormGroup controlId="password">
-          <FormControl
-            placeholder="password"
-            name="password"
-            type="password"
-            ref={register}
-          />
-        </FormGroup>
-        <Button block disabled={isSubmitting} type="submit">
-          Login
-        </Button>
+        <FadeIn>
+          <FormGroup controlId="username">
+            <FormControl
+              autoFocus
+              placeholder="username"
+              name="username"
+              type="text"
+              ref={register}
+            />
+          </FormGroup>
+          <FormGroup controlId="password">
+            <FormControl
+              placeholder="password"
+              name="password"
+              type="password"
+              ref={register}
+            />
+          </FormGroup>
+          <Button block disabled={isSubmitting} type="submit">
+            Login
+          </Button>
+        </FadeIn>
       </form>
     </div>
   );
