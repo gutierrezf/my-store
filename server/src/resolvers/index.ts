@@ -1,5 +1,5 @@
 import { AuthResolver } from "./AuthResolver";
-import { BookResolver } from "./BookResolver";
+import { UserResolver } from "./UserResolver";
 
-const resolvers = [AuthResolver, BookResolver];
+const resolvers = [AuthResolver, UserResolver];
 export default resolvers;
