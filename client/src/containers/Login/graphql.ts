@@ -6,6 +6,7 @@ export const LOGIN_MUTATION = gql`
       user {
         id
         email
+        isAdmin
       }
       errors {
         path
@@ -20,6 +21,7 @@ export const ME_QUERY = gql`
     me {
       id
       email
+      isAdmin
     }
   }
 `;

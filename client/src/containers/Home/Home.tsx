@@ -1,5 +1,6 @@
 import React from "react";
 import MyCalendar, { IEvent } from "./calendar";
+import Protected from "../../components/Protected";
 
 const myEvents: IEvent[] = [
   {
@@ -20,7 +21,9 @@ export default function Home() {
   return (
     <div className="Home mt-5">
       <h1>Home Component</h1>
-      <p>A simple note taking app</p>
+      <Protected>
+        <p>A simple note taking app</p>
+      </Protected>
       <MyCalendar events={myEvents} />
     </div>
   );
