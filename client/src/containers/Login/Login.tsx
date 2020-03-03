@@ -8,7 +8,6 @@ import { LOGIN_MUTATION, ME_QUERY } from "./graphql";
 import { useUserContext } from "../../context/userContext";
 import { IMe, IUserLogin } from "../../interfaces";
 import Loading from "../../components/Loading";
-import { APP_NAME } from "../../constants";
 import "./Login.css";
 
 type FormData = {
@@ -48,8 +47,6 @@ export default function Login() {
 
   return (
     <div className="Login">
-      <h1>{APP_NAME}</h1>
-
       <form className="pt-3" onSubmit={onSubmit}>
         <h5 className="text-left">Login</h5>
         <FadeIn>
