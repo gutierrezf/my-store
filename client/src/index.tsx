@@ -8,7 +8,7 @@ import { UserProvider } from "./context/userContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "typeface-roboto";
-import "./index.css";
+import "./index.scss";
 
 const app = (
   <UserProvider>

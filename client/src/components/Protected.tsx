@@ -9,7 +9,6 @@ export interface ProtectedProps {
 const Protected = ({ children, onDefault = () => null }: ProtectedProps) => {
   const { user } = useUserContext();
 
-  console.log("here", user);
   if (user?.isAdmin && children) {
     return <div>{children}</div>;
   }

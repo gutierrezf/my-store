@@ -5,7 +5,7 @@ import Routes from "./Routes";
 import { useUserContext } from "./context/userContext";
 import Login from "./containers/Login";
 import { APP_NAME } from "./constants";
-import "./App.css";
+import "./App.scss";
 
 function renderBody() {
   return (
@@ -15,7 +15,9 @@ function renderBody() {
           <Link to="/">{APP_NAME}</Link>
         </Navbar.Brand>
       </Navbar>
-      <Routes />
+      <div className={"m-5 pt-3"}>
+        <Routes />
+      </div>
     </>
   );
 }
