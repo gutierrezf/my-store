@@ -1,8 +1,14 @@
 import React from "react";
-import ReactLoading from "react-loading";
+import Spinner from "react-bootstrap/Spinner";
 
 export default () => (
   <div className="d-flex justify-content-center">
-    <ReactLoading type="bars" color="black" height={"10%"} width={"10%"} />
+    <Spinner animation="grow" variant="primary" />
+    <Spinner animation="grow" variant="secondary" />
+    <Spinner animation="grow" variant="success" />
+    <Spinner animation="grow" variant="danger" />
+    <Spinner animation="grow" variant="warning" />
+    <Spinner animation="grow" variant="info" />
+    <Spinner animation="grow" variant="dark" />
   </div>
 );
