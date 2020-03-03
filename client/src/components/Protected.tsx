@@ -3,14 +3,19 @@ import { useUserContext } from "../context/userContext";
 
 export interface ProtectedProps {
   onDefault?: () => JSX.Element | null;
+  authOnly?: boolean;
   children: React.ReactNode;
 }
 
-const Protected = ({ children, onDefault = () => null }: ProtectedProps) => {
+const Protected = ({
+  children,
+  onDefault = () => null,
+  authOnly = false
+}: ProtectedProps) => {
   const { user } = useUserContext();
 
-  if (user?.isAdmin && children) {
-    return <div>{children}</div>;
+  if (((authOnly && user) || user?.isAdmin) && children) {
+    return <>{children}</>;
   }
 
   return onDefault();
