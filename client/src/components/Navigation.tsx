@@ -22,7 +22,7 @@ const Navigation = () => {
           >
             <Nav>
               <Link className="nav-link" to="/">
-                Home
+                Agenda
               </Link>
               <Link className="nav-link" to="/pacients">
                 Pacientes

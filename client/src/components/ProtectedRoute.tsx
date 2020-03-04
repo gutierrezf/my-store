@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import { useUserContext } from "../context/userContext";
 
 export interface ProtectedRouteProps {
@@ -9,7 +9,11 @@ export interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ path, component }: ProtectedRouteProps) => {
   const { isAdmin } = useUserContext();
-  return isAdmin ? <Route path={path} component={component} /> : null;
+  return isAdmin() ? (
+    <Route path={path} component={component} />
+  ) : (
+    <Redirect to={"/"} />
+  );
 };
 
 export default ProtectedRoute;
