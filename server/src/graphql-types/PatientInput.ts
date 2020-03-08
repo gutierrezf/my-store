@@ -3,17 +3,17 @@ import { InputType, Field } from "type-graphql";
 @InputType()
 export class PatientInput {
   @Field()
-  email: string;
+  email?: string;
 
   @Field()
-  name: string;
+  name?: string;
 
   @Field()
-  address: string;
+  address?: string;
 
   @Field()
-  phone: string;
+  phone?: string;
 
   @Field()
-  insured: boolean;
+  insured?: boolean;
 }
