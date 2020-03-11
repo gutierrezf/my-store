@@ -24,7 +24,7 @@ const Navigation = () => {
               <Link className="nav-link" to="/">
                 Agenda
               </Link>
-              <Link className="nav-link" to="/pacients">
+              <Link className="nav-link" to="/patients">
                 Pacientes
               </Link>
               <Protected>

@@ -72,11 +72,11 @@ const MyCalendar = ({ events: myEvents }: MyCalendarProps) => {
         onNavigate={date => setDate(date)}
         onSelectEvent={event => alert(event.desc)}
         onSelectSlot={handleSelect}
-        timeslots={2}
+        timeslots={1}
         step={30}
         dayLayoutAlgorithm={"no-overlap"}
-        min={new Date(0, 0, 0, 7, 0, 0, 0)}
-        max={new Date(0, 0, 0, 19, 0, 0, 0)}
+        min={new Date(0, 0, 0, 7, 30, 0, 0)}
+        max={new Date(0, 0, 0, 18, 0, 0, 0)}
         components={{
           event: Event
         }}
