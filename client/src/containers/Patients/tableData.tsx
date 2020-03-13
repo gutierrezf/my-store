@@ -1,3 +1,4 @@
+import React from "react";
 import { IPatient } from "../../interfaces";
 
 const columns = [
@@ -23,16 +24,29 @@ const columns = [
   {
     label: "Asegurado",
     field: "insured"
+  },
+  {
+    label: "",
+    field: "edit"
   }
 ];
 
-const getPatientsTableData = (patients: IPatient[]) => {
+const getPatientsTableData = (
+  patients: IPatient[],
+  onEdit: (id: number) => void
+) => {
   return {
     columns,
     rows: patients.map(patient => {
       return {
         ...patient,
-        insured: patient.insured ? "SI" : "NO"
+        insured: patient.insured ? "SI" : "NO",
+        edit: (
+          <span className="link-like" onClick={() => onEdit(patient.id)}>
+            <i className="fa fa-edit mr-2" />
+            edit
+          </span>
+        )
       };
     })
   };

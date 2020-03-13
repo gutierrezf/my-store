@@ -6,17 +6,18 @@ import { IPatient } from "../../interfaces";
 type FormData = IPatient;
 export interface PatientFormProps {
   pushFormData: (data: FormData) => void;
+  patient?: IPatient;
 }
 
-const PatientForm = ({ pushFormData }: PatientFormProps) => {
+const PatientForm = ({ pushFormData, patient }: PatientFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { isSubmitting }
-  } = useForm<FormData>();
+  } = useForm<FormData>({ defaultValues: patient });
 
-  const onSubmit = handleSubmit(patient => {
-    pushFormData(patient);
+  const onSubmit = handleSubmit(formData => {
+    pushFormData({ ...patient, ...formData });
   });
 
   return (
@@ -63,7 +64,7 @@ const PatientForm = ({ pushFormData }: PatientFormProps) => {
         />
       </FormGroup>
       <Button variant="success" block disabled={isSubmitting} type="submit">
-        Crear
+        {patient?.id ? "Actualizar" : "Crear"}
       </Button>
     </form>
   );

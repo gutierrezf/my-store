@@ -39,3 +39,32 @@ export const CREATE_PATIENT = gql`
     }
   }
 `;
+
+export const UPDATE_PATIENT = gql`
+  mutation(
+    $id: Int!
+    $name: String!
+    $email: String!
+    $address: String!
+    $phone: String!
+    $insured: Boolean!
+  ) {
+    updatePatient(
+      id: $id
+      input: {
+        name: $name
+        email: $email
+        address: $address
+        phone: $phone
+        insured: $insured
+      }
+    ) {
+      id
+      name
+      email
+      address
+      phone
+      insured
+    }
+  }
+`;
