@@ -6,7 +6,7 @@ import "./calendar.scss";
 
 export interface IEvent {
   title: string;
-  desc: string;
+  desc?: string;
   start: Date;
   end: Date;
 }
@@ -19,9 +19,14 @@ interface SlotInfo {
   start: Date | string;
   end: Date | string;
 }
+export interface IEventTimeSlot {
+  startDate: Date;
+  endDate: Date;
+}
 
 export interface MyCalendarProps {
   events: IEvent[];
+  onNewEvent: (eventTime: IEventTimeSlot) => void;
 }
 
 const localizer = momentLocalizer(moment);
@@ -35,28 +40,15 @@ const Event = ({ event }: EventProps) => {
   );
 };
 
-const MyCalendar = ({ events: myEvents }: MyCalendarProps) => {
+const MyCalendar = ({ events, onNewEvent }: MyCalendarProps) => {
   const [date, setDate] = useState(new Date());
-  const [events, setEvents] = useState(myEvents);
   const [view, setView] = useState<View>("week");
 
   const handleSelect = ({ start, end }: SlotInfo) => {
     const startDate = new Date(start.toString());
     const endDate = new Date(end.toString());
 
-    const title = window.prompt("New Event name");
-
-    if (title) {
-      setEvents([
-        ...events,
-        {
-          start: startDate,
-          end: endDate,
-          title,
-          desc: ""
-        }
-      ]);
-    }
+    onNewEvent({ startDate, endDate });
   };
 
   return (
@@ -70,7 +62,7 @@ const MyCalendar = ({ events: myEvents }: MyCalendarProps) => {
         onView={newView => setView(newView)}
         date={date}
         onNavigate={date => setDate(date)}
-        onSelectEvent={event => alert(event.desc)}
+        onSelectEvent={event => alert(event.title)}
         onSelectSlot={handleSelect}
         timeslots={1}
         step={30}
