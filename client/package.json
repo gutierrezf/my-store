@@ -43,6 +43,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "prestart": "yarn",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
