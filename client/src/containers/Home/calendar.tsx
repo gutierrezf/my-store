@@ -5,6 +5,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./calendar.scss";
 
 export interface IEvent {
+  id: number;
   title: string;
   desc?: string;
   start: Date;
@@ -59,10 +60,10 @@ const MyCalendar = ({ events, onNewEvent }: MyCalendarProps) => {
         events={events}
         view={view}
         views={["week", "day"]}
-        onView={newView => setView(newView)}
+        onView={(newView) => setView(newView)}
         date={date}
-        onNavigate={date => setDate(date)}
-        onSelectEvent={event => alert(event.title)}
+        onNavigate={(date) => setDate(date)}
+        onSelectEvent={(event) => alert(event.title)}
         onSelectSlot={handleSelect}
         timeslots={1}
         step={30}
@@ -70,7 +71,7 @@ const MyCalendar = ({ events, onNewEvent }: MyCalendarProps) => {
         min={new Date(0, 0, 0, 7, 30, 0, 0)}
         max={new Date(0, 0, 0, 18, 0, 0, 0)}
         components={{
-          event: Event
+          event: Event,
         }}
       />
     </div>

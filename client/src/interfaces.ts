@@ -17,6 +17,14 @@ export interface IPatient {
   insured: boolean;
 }
 
+export interface IAppointment {
+  id: number;
+  title: string;
+  desc?: string;
+  start: string;
+  end: string;
+}
+
 export interface IGraphqlError {
   path: string;
   message: string;
