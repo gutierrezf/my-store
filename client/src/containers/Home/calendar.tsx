@@ -28,6 +28,7 @@ export interface IEventTimeSlot {
 export interface MyCalendarProps {
   events: IEvent[];
   onNewEvent: (eventTime: IEventTimeSlot) => void;
+  onSelectEvent: (event: IEvent) => void;
 }
 
 const localizer = momentLocalizer(moment);
@@ -41,15 +42,19 @@ const Event = ({ event }: EventProps) => {
   );
 };
 
-const MyCalendar = ({ events, onNewEvent }: MyCalendarProps) => {
+const MyCalendar = ({ events, onNewEvent, onSelectEvent }: MyCalendarProps) => {
   const [date, setDate] = useState(new Date());
   const [view, setView] = useState<View>("week");
 
-  const handleSelect = ({ start, end }: SlotInfo) => {
+  const handleSelectSlot = ({ start, end }: SlotInfo) => {
     const startDate = new Date(start.toString());
     const endDate = new Date(end.toString());
 
     onNewEvent({ startDate, endDate });
+  };
+
+  const handleSelectEvent = (event: IEvent) => {
+    onSelectEvent(event);
   };
 
   return (
@@ -63,8 +68,8 @@ const MyCalendar = ({ events, onNewEvent }: MyCalendarProps) => {
         onView={(newView) => setView(newView)}
         date={date}
         onNavigate={(date) => setDate(date)}
-        onSelectEvent={(event) => alert(event.title)}
-        onSelectSlot={handleSelect}
+        onSelectEvent={handleSelectEvent}
+        onSelectSlot={handleSelectSlot}
         timeslots={1}
         step={30}
         dayLayoutAlgorithm={"no-overlap"}
