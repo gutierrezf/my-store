@@ -15,5 +15,11 @@ export class PatientInput {
   phone?: string;
 
   @Field()
+  gender?: string;
+
+  @Field()
+  birthday?: string;
+
+  @Field()
   insured?: boolean;
 }

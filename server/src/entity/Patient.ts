@@ -25,6 +25,14 @@ export class Patient extends BaseEntity {
   phone: string;
 
   @Field()
+  @Column({default: 'm'})
+  gender: string;
+
+  @Field()
+  @Column({default: ''})
+  birthday: string;
+
+  @Field()
   @Column()
   insured: boolean;
 }

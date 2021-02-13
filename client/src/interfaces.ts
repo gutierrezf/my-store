@@ -15,6 +15,8 @@ export interface IPatient {
   address: string;
   phone: string;
   insured: boolean;
+  gender: string;
+  birthday: string;
 }
 
 export interface IAppointment {

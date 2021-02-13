@@ -11,12 +11,14 @@ import Loading from "../../components/Loading";
 import { IPatient } from "../../interfaces";
 import getPatientsTableData from "./tableData";
 import PatientForm from "../../components/PatientForm";
+import { useUserContext } from "../../context/userContext";
 
 export interface IGraphqlPatients {
   patients: IPatient[];
 }
 
 const Patients = () => {
+  const { isAdmin } = useUserContext();
   const { loading, data, refetch } = useQuery<IGraphqlPatients>(FIND_PATIENTS);
   const [createPatient] = useMutation(CREATE_PATIENT);
   const [updatePatient] = useMutation(UPDATE_PATIENT);
@@ -31,11 +33,11 @@ const Patients = () => {
   const handleFormSubmit = async (patient: IPatient) => {
     if (patient.id) {
       await updatePatient({
-        variables: patient
+        variables: patient,
       });
     } else {
       await createPatient({
-        variables: patient
+        variables: patient,
       });
     }
 
@@ -47,10 +49,14 @@ const Patients = () => {
   if (loading) return <Loading />;
 
   const patients = data?.patients || [];
-  const tableData = getPatientsTableData(patients, (id: number) => {
-    setCurrentPatient(patients.find(patient => patient.id === id));
-    showModal();
-  });
+  const tableData = getPatientsTableData(
+    patients,
+    (id: number) => {
+      setCurrentPatient(patients.find((patient) => patient.id === id));
+      showModal();
+    },
+    isAdmin()
+  );
 
   return (
     <div>

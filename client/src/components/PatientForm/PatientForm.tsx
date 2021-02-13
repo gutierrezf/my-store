@@ -13,10 +13,10 @@ const PatientForm = ({ pushFormData, patient }: PatientFormProps) => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting }
-  } = useForm<FormData>({ defaultValues: patient });
+    formState: { isSubmitting },
+  } = useForm<FormData>({ defaultValues: { ...patient, gender: "m" } });
 
-  const onSubmit = handleSubmit(formData => {
+  const onSubmit = handleSubmit((formData) => {
     pushFormData({ ...patient, ...formData });
   });
 
@@ -55,6 +55,37 @@ const PatientForm = ({ pushFormData, patient }: PatientFormProps) => {
           ref={register}
         />
       </FormGroup>
+
+      <FormGroup controlId="birthday">
+        <FormControl
+          placeholder="Fecha de Nacimiento"
+          name="birthday"
+          type="date"
+          ref={register}
+        />
+      </FormGroup>
+
+      <FormGroup controlId="gender">
+        <FormCheck
+          inline
+          label="Masculino"
+          type="radio"
+          name="gender"
+          value="m"
+          id="m"
+          ref={register}
+        />
+        <FormCheck
+          inline
+          label="Femenino"
+          type="radio"
+          name="gender"
+          value="f"
+          id="f"
+          ref={register}
+        />
+      </FormGroup>
+
       <FormGroup controlId="insured">
         <FormCheck
           name="insured"

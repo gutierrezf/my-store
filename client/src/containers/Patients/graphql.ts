@@ -9,6 +9,8 @@ export const FIND_PATIENTS = gql`
       address
       phone
       insured
+      gender
+      birthday
     }
   }
 `;
@@ -36,6 +38,8 @@ export const CREATE_PATIENT = gql`
       address
       phone
       insured
+      gender
+      birthday
     }
   }
 `;
@@ -65,6 +69,8 @@ export const UPDATE_PATIENT = gql`
       address
       phone
       insured
+      gender
+      birthday
     }
   }
 `;
