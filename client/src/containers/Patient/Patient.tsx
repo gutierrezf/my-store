@@ -2,25 +2,44 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 
-import { FIND_PATIENT } from "./graphql";
+import { FIND_PATIENT, FIND_RECORD_BY_PATIENT } from "./graphql";
 import { IPatient } from "../../interfaces";
 
-export interface IGraphqlPatient {
+interface IGraphqlPatient {
   findPatient: IPatient;
+}
+interface IGraphqlRecord {
+  findRecordByPatient: any;
+}
+
+interface ParamTypes {
+  id?: string;
 }
 
 const Patient = () => {
-  const { id = "" } = useParams();
+  const { id = "" } = useParams<ParamTypes>();
   const patientId = parseInt(id, 10);
-  const { loading, data } = useQuery<IGraphqlPatient>(FIND_PATIENT, {
+  const {
+    loading: patientLoading,
+    data: patientData,
+  } = useQuery<IGraphqlPatient>(FIND_PATIENT, {
     variables: { pid: patientId },
   });
 
-  if (loading) {
+  const { data: recordData } = useQuery<IGraphqlRecord>(
+    FIND_RECORD_BY_PATIENT,
+    {
+      variables: { pid: patientId },
+    }
+  );
+
+  if (patientLoading) {
     return <h1>loading</h1>;
   }
 
-  const patient = data?.findPatient;
+  const patient = patientData?.findPatient;
+  const record = recordData?.findRecordByPatient;
+
   if (!patient) {
     return <h1>El paciente no existe.</h1>;
   }
@@ -28,7 +47,7 @@ const Patient = () => {
   return (
     <>
       <div style={{ textAlign: "left" }}>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        <pre>{JSON.stringify({ patient, record }, null, 2)}</pre>
       </div>
     </>
   );

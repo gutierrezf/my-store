@@ -22,6 +22,8 @@ export const CREATE_PATIENT = gql`
     $address: String!
     $phone: String!
     $insured: Boolean!
+    $gender: String!
+    $birthday: String!
   ) {
     createPatient(
       input: {
@@ -30,6 +32,8 @@ export const CREATE_PATIENT = gql`
         address: $address
         phone: $phone
         insured: $insured
+        gender: $gender
+        birthday: $birthday
       }
     ) {
       id
@@ -52,6 +56,8 @@ export const UPDATE_PATIENT = gql`
     $address: String!
     $phone: String!
     $insured: Boolean!
+    $gender: String!
+    $birthday: String!
   ) {
     updatePatient(
       id: $id
@@ -61,6 +67,8 @@ export const UPDATE_PATIENT = gql`
         address: $address
         phone: $phone
         insured: $insured
+        gender: $gender
+        birthday: $birthday
       }
     ) {
       id

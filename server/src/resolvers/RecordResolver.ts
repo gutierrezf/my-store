@@ -40,4 +40,11 @@ export class RecordResolver {
     return await Record.findOne({ id });
   }
 
+  @Query(() => Record, { nullable: true })
+  async findRecordByPatient(
+    @Arg("patientId", () => Int) patientId: number
+  ): Promise<Record | undefined> {
+    return await Record.findOne({ patientId });
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
-import { Field, ObjectType  } from "type-graphql";
+import { Field, Int, ObjectType  } from "type-graphql";
 
 @ObjectType()
 @Entity()
@@ -7,6 +7,10 @@ export class Record extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Field(() => Int)
+  @Column({type: "int", unique: true, nullable: false})
+  patientId: number;
 
   @Field(() => [String])
   @Column("simple-array")
