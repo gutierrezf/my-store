@@ -14,7 +14,7 @@ const PatientForm = ({ pushFormData, patient }: PatientFormProps) => {
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<FormData>({ defaultValues: { ...patient, gender: "m" } });
+  } = useForm<FormData>({ defaultValues: { ...patient } });
 
   const onSubmit = handleSubmit((formData) => {
     pushFormData({ ...patient, ...formData });

@@ -19,6 +19,24 @@ export interface IPatient {
   birthday: string;
 }
 
+export interface IRecord {
+  id: number;
+  patientId: number
+  knownConditions: string[];
+  toxicRecord: string[];
+  medicRecord: string;
+  surgicalRecord: string;
+  allergies: string;
+  symptoms: string;
+  healthCondition: string;
+  physiatryEvaluation: string;
+  rightMotionArc: string;
+  leftMotionArc: string;
+  rightAnkylosis: string;
+  leftAnkylosis: string;
+  comments: string;
+}
+
 export interface IAppointment {
   id: number;
   title: string;
