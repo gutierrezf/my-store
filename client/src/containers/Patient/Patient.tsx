@@ -76,7 +76,7 @@ const Patient = () => {
 
   return (
     <>
-      <Accordion defaultActiveKey="0">
+      <Accordion defaultActiveKey="1">
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey="0">
             Datos Generales

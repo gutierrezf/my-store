@@ -1,5 +1,11 @@
 import React from "react";
-import { Button, FormGroup, FormControl, FormCheck } from "react-bootstrap";
+import {
+  Button,
+  FormGroup,
+  FormControl,
+  FormCheck,
+  FormLabel,
+} from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { IPatient } from "../../interfaces";
 
@@ -21,53 +27,32 @@ const PatientForm = ({ pushFormData, patient }: PatientFormProps) => {
   });
 
   return (
-    <form className="pt-3" onSubmit={onSubmit}>
+    <form className="pt-3 text-left" onSubmit={onSubmit}>
       <FormGroup controlId="name">
-        <FormControl
-          autoFocus
-          placeholder="Nombre"
-          name="name"
-          type="text"
-          ref={register}
-        />
+        <FormLabel>Nombre</FormLabel>
+        <FormControl autoFocus name="name" type="text" ref={register} />
       </FormGroup>
       <FormGroup controlId="email">
-        <FormControl
-          placeholder="email"
-          name="email"
-          type="text"
-          ref={register}
-        />
+        <FormLabel>E-mail</FormLabel>
+        <FormControl name="email" type="text" ref={register} />
       </FormGroup>
       <FormGroup controlId="address">
-        <FormControl
-          placeholder="Dirección"
-          name="address"
-          type="text"
-          ref={register}
-        />
+        <FormLabel>Dirección</FormLabel>
+        <FormControl name="address" type="text" ref={register} />
       </FormGroup>
       <FormGroup controlId="phone">
-        <FormControl
-          placeholder="Tel."
-          name="phone"
-          type="text"
-          ref={register}
-        />
+        <FormLabel>Teléfono</FormLabel>
+        <FormControl name="phone" type="text" ref={register} />
       </FormGroup>
 
       <FormGroup controlId="birthday">
-        <FormControl
-          placeholder="Fecha de Nacimiento"
-          name="birthday"
-          type="date"
-          ref={register}
-        />
+        <FormLabel>Fecha de Nacimiento</FormLabel>
+        <FormControl name="birthday" type="date" ref={register} />
       </FormGroup>
 
       <FormGroup controlId="gender">
+        <FormLabel>Género</FormLabel>
         <FormCheck
-          inline
           label="Masculino"
           type="radio"
           name="gender"
@@ -76,7 +61,6 @@ const PatientForm = ({ pushFormData, patient }: PatientFormProps) => {
           ref={register}
         />
         <FormCheck
-          inline
           label="Femenino"
           type="radio"
           name="gender"
