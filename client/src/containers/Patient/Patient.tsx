@@ -1,11 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { Accordion, Card } from "react-bootstrap";
+import { Accordion, Card, Breadcrumb } from "react-bootstrap";
 
 import PatientForm from "../../components/PatientForm";
 import RecordFrom from "../../components/RecordFrom";
-import { FIND_PATIENT, FIND_RECORD_BY_PATIENT } from "./graphql";
+import {
+  FIND_PATIENT,
+  FIND_RECORD_BY_PATIENT,
+  CREATE_RECORD,
+  UPDATE_RECORD,
+} from "./graphql";
 import { UPDATE_PATIENT } from "../Patients/graphql";
 import { IPatient, IRecord } from "../../interfaces";
 
@@ -25,6 +30,8 @@ const Patient = () => {
   const patientId = parseInt(id, 10);
 
   const [updatePatient] = useMutation(UPDATE_PATIENT);
+  const [updateRecord] = useMutation(UPDATE_RECORD);
+  const [createRecord] = useMutation(CREATE_RECORD);
 
   const {
     loading: pIsLoading,
@@ -60,14 +67,18 @@ const Patient = () => {
   };
 
   const handleRecordFormSubmit = async (formData: IRecord) => {
-    console.log(formData);
-    // if (formData.id) {
-    //   await updatePatient({
-    //     variables: formData,
-    //   });
-    // }
+    formData.patientId = parseInt(id, 10);
+    if (formData.id) {
+      await updateRecord({
+        variables: formData,
+      });
+    } else {
+      await createRecord({
+        variables: formData,
+      });
+    }
 
-    // refetchRecord();
+    refetchRecord();
   };
 
   if (!patient) {
@@ -76,6 +87,10 @@ const Patient = () => {
 
   return (
     <>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/patients">Pacientes</Breadcrumb.Item>
+        <Breadcrumb.Item active>{patient.name}</Breadcrumb.Item>
+      </Breadcrumb>
       <Accordion defaultActiveKey="1">
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey="0">
@@ -108,10 +123,6 @@ const Patient = () => {
           </Accordion.Collapse>
         </Card>
       </Accordion>
-
-      <div style={{ textAlign: "left" }}>
-        <pre>{JSON.stringify({ patient, record }, null, 2)}</pre>
-      </div>
     </>
   );
 };

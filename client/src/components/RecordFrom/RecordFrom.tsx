@@ -106,12 +106,22 @@ const RecordForm = ({ pushFormData, record }: RecordFormProps) => {
 
         <FormGroup controlId="medicRecord">
           <FormLabel>Antecedentes Médicos</FormLabel>
-          <FormControl name="medicRecord" as="textarea" ref={register} />
+          <FormControl
+            name="medicRecord"
+            as="textarea"
+            rows={5}
+            ref={register}
+          />
         </FormGroup>
 
         <FormGroup controlId="surgicalRecord">
           <FormLabel>Antecedentes Quirúrgicos</FormLabel>
-          <FormControl name="surgicalRecord" as="textarea" ref={register} />
+          <FormControl
+            name="surgicalRecord"
+            as="textarea"
+            rows={5}
+            ref={register}
+          />
         </FormGroup>
 
         <FormGroup controlId="toxicRecord">
@@ -137,17 +147,22 @@ const RecordForm = ({ pushFormData, record }: RecordFormProps) => {
 
         <FormGroup controlId="allergies">
           <FormLabel>Alergias</FormLabel>
-          <FormControl name="allergies" as="textarea" ref={register} />
+          <FormControl name="allergies" as="textarea" rows={5} ref={register} />
         </FormGroup>
 
         <FormGroup controlId="symptoms">
           <FormLabel>Síntomas o signos de presentación</FormLabel>
-          <FormControl name="symptoms" as="textarea" ref={register} />
+          <FormControl name="symptoms" as="textarea" rows={5} ref={register} />
         </FormGroup>
 
         <FormGroup controlId="healthCondition">
           <FormLabel>Historia de Condición de Salud Actual</FormLabel>
-          <FormControl name="healthCondition" as="textarea" ref={register} />
+          <FormControl
+            name="healthCondition"
+            as="textarea"
+            rows={5}
+            ref={register}
+          />
         </FormGroup>
 
         <FormGroup controlId="physiatryEvaluation">
@@ -155,6 +170,7 @@ const RecordForm = ({ pushFormData, record }: RecordFormProps) => {
           <FormControl
             name="physiatryEvaluation"
             as="textarea"
+            rows={5}
             ref={register}
           />
         </FormGroup>
@@ -163,14 +179,24 @@ const RecordForm = ({ pushFormData, record }: RecordFormProps) => {
           <Col>
             <FormGroup controlId="rightMotionArc">
               <FormLabel>Arco de Movimiento Derecho</FormLabel>
-              <FormControl name="rightMotionArc" as="textarea" ref={register} />
+              <FormControl
+                name="rightMotionArc"
+                as="textarea"
+                rows={5}
+                ref={register}
+              />
             </FormGroup>
           </Col>
 
           <Col>
             <FormGroup controlId="leftMotionArc">
               <FormLabel>Arco de Movimiento Izquierdo</FormLabel>
-              <FormControl name="leftMotionArc" as="textarea" ref={register} />
+              <FormControl
+                name="leftMotionArc"
+                as="textarea"
+                rows={5}
+                ref={register}
+              />
             </FormGroup>
           </Col>
         </Row>
@@ -179,21 +205,31 @@ const RecordForm = ({ pushFormData, record }: RecordFormProps) => {
           <Col>
             <FormGroup controlId="rightAnkylosis">
               <FormLabel>Anquilosis Derecho</FormLabel>
-              <FormControl name="rightAnkylosis" as="textarea" ref={register} />
+              <FormControl
+                name="rightAnkylosis"
+                as="textarea"
+                rows={5}
+                ref={register}
+              />
             </FormGroup>
           </Col>
 
           <Col>
             <FormGroup controlId="leftAnkylosis">
               <FormLabel>Anquilosis Izquierdo</FormLabel>
-              <FormControl name="leftAnkylosis" as="textarea" ref={register} />
+              <FormControl
+                name="leftAnkylosis"
+                as="textarea"
+                rows={5}
+                ref={register}
+              />
             </FormGroup>
           </Col>
         </Row>
 
         <FormGroup controlId="comments">
           <FormLabel>Comentarios</FormLabel>
-          <FormControl name="comments" as="textarea" ref={register} />
+          <FormControl name="comments" as="textarea" rows={5} ref={register} />
         </FormGroup>
 
         <Button variant="success" block disabled={isSubmitting} type="submit">
