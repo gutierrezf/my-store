@@ -4,8 +4,8 @@
   "main": "index.js",
   "author": "Francis Gutierrez <ingutierrez.u@gmail.com>",
   "scripts": {
-    "postinstall": "cd client && npm install && cd ../server && npm install",
-    "start": "cd client && yarn start",
+    "postinstall": "cd client && npm install && npm run build && cd ../server && npm install",
+    "start": "cd client && node serve.js",
     "prestart": "cd server && yarn start &",
     "poststart": ""
   },
