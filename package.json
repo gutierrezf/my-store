@@ -5,9 +5,9 @@
   "author": "Francis Gutierrez <ingutierrez.u@gmail.com>",
   "scripts": {
     "postinstall": "cd client && npm install && cd ../server && npm install",
-    "start": "",
+    "start": "cd client && yarn start",
     "prestart": "cd server && yarn start &",
-    "poststart": "cd client && yarn start"
+    "poststart": ""
   },
   "license": "MIT"
 }
