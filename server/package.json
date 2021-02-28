@@ -26,7 +26,6 @@
     "typeorm": "0.2.20"
   },
   "scripts": {
-    "prestart": "yarn",
     "start": "nodemon --exec ts-node --files src/index.ts",
     "build": "tsc"
   }

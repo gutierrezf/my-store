@@ -7,6 +7,7 @@ import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import resolvers from "./resolvers";
 import cors from "cors";
+import path from "path";
 
 // I like to use redis for this: https://github.com/tj/connect-redis
 const SQLiteStore = connectSqlite3(session);
@@ -34,7 +35,7 @@ const SQLiteStore = connectSqlite3(session);
 
   // get options from ormconfig.js
   const dbOptions = await getConnectionOptions(
-    process.env.NODE_ENV || "development"
+    "development"
   );
   await createConnection({ ...dbOptions, name: "default" });
 
@@ -53,8 +54,15 @@ const SQLiteStore = connectSqlite3(session);
     })
   );
 
+  app.use(express.static(path.join(__dirname+'../../../client/build')));
+
   apolloServer.applyMiddleware({ app, cors: false, path: "/graphql" });
-  const port = process.env.SERVER_PORT || 4000;
+
+  app.get('*', (_, res) => {
+    res.sendFile(path.join(__dirname+'../../../client/build/index.html'));
+  });
+
+  const port = process.env.PORT || 4000;
   app.listen(port, () => {
     console.log(`server started at http://localhost:${port}/graphql`);
   });
