@@ -4,9 +4,11 @@
   "main": "index.js",
   "author": "Francis Gutierrez <ingutierrez.u@gmail.com>",
   "scripts": {
-    "postinstall": "cd client && npm install && npm run build && cd ../server && npm install",
+    "postinstall": "cd client && npm install",
     "start": "cd client && node serve.js",
-    "prestart": "cd server && yarn start &",
+    "build": "npm run build",
+    "prestar": "cd server && yarn start &",
+    "ser-instl" : "&& cd ../server && npm install",
     "poststart": ""
   },
   "license": "MIT"
