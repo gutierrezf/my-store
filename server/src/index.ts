@@ -40,6 +40,8 @@ const SQLiteStore = connectSqlite3(session);
   await createConnection({ ...dbOptions, name: "default" });
 
   const apolloServer = new ApolloServer({
+    introspection: true,
+    playground: true,
     schema: await buildSchema({
       resolvers,
       validate: false
