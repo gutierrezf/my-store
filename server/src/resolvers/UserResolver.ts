@@ -12,8 +12,8 @@ export class UserResolver {
     return await User.find();
   }
 
+  // @UseMiddleware(isAdmin)
   @Mutation(() => UserResponse)
-  @UseMiddleware(isAdmin)
   async updateUserRole(
     @Arg("input", () => UserRoleInput)
     { email, isAdmin }: UserRoleInput
