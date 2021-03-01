@@ -4,13 +4,11 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 
 export const cache = new InMemoryCache();
 
-const port = 4000;
-
 const client = new ApolloClient({
   cache,
   link: new HttpLink({
     credentials: "include",
-    uri: `http://localhost:${port}/graphql`
+    uri: `https://terapia-fisica-app.herokuapp.com/graphql`
   })
 });
 
