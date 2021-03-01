@@ -2,10 +2,12 @@
   "name": "my-store",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Francis Gutierrez <ingutierrez.u@gmail.com>",
+  "author": "",
   "scripts": {
     "postinstall": "cd client && npm install && cd ../server && npm install",
-    "start": "cd server && npm start",
+    "start": "",
+    "prestart": "cd server && yarn start &",
+    "poststart": "cd client && yarn start",
     "build": "cd client && npm run build"
   },
   "license": "MIT"

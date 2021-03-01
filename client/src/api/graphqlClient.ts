@@ -8,7 +8,7 @@ const client = new ApolloClient({
   cache,
   link: new HttpLink({
     credentials: "include",
-    uri: `https://terapia-fisica-app.herokuapp.com/graphql`
+    uri: `http://localhost:4000/graphql`
   })
 });
 

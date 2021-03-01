@@ -4,6 +4,7 @@ import Home from "./containers/Home";
 import Patients from "./containers/Patients";
 import Patient from "./containers/Patient";
 import Users from "./containers/Users";
+import Indication from "./containers/Indication";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function Routes() {
@@ -13,6 +14,7 @@ export default function Routes() {
       <Route path="/patients" component={Patients} />
       <ProtectedRoute path="/users" component={Users} />
       <ProtectedRoute path="/patient/:id" component={Patient} />
+      <ProtectedRoute path="/indication/:name" component={Indication} />
       <Redirect to={"/"} />
     </Switch>
   );

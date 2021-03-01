@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Accordion, Card, Breadcrumb } from "react-bootstrap";
 
@@ -91,6 +91,12 @@ const Patient = () => {
         <Breadcrumb.Item href="/patients">Pacientes</Breadcrumb.Item>
         <Breadcrumb.Item active>{patient.name}</Breadcrumb.Item>
       </Breadcrumb>
+      <Link
+        className="nav-link btn btn-primary"
+        to={`/indication/${patient.name}`}
+      >
+        Recéta
+      </Link>
       <Accordion defaultActiveKey="1">
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey="0">
@@ -119,6 +125,12 @@ const Patient = () => {
                   record={record}
                 />
               </div>
+              <Link
+                className="nav-link btn btn-primary"
+                to={`/indication/${patient.name}`}
+              >
+                Recéta
+              </Link>
             </Card.Body>
           </Accordion.Collapse>
         </Card>
