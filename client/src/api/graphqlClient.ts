@@ -4,7 +4,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 
 export const cache = new InMemoryCache();
 
-const port = process.env.PORT || 4000;
+const port = 4000;
 
 const client = new ApolloClient({
   cache,
