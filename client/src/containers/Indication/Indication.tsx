@@ -1,5 +1,11 @@
 import React from "react";
-import { FormGroup, FormControl, FormLabel, Container } from "react-bootstrap";
+import {
+  Button,
+  FormGroup,
+  FormControl,
+  FormLabel,
+  Container,
+} from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
@@ -20,8 +26,10 @@ const Indication = () => {
     },
   });
 
-  const onSubmit = handleSubmit((formData) => {
-    console.log(formData);
+  const onSubmit = handleSubmit(() => {
+    if (window) {
+      window.print();
+    }
   });
 
   return (
@@ -48,6 +56,10 @@ const Indication = () => {
           <FormLabel>Receta</FormLabel>
           <FormControl name="comments" as="textarea" rows={12} ref={register} />
         </FormGroup>
+
+        <Button variant="primary" block type="submit">
+          Imprimir
+        </Button>
       </form>
     </Container>
   );
