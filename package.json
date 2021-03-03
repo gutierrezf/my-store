@@ -6,8 +6,8 @@
   "scripts": {
     "postinstall": "cd client && npm install && cd ../server && npm install",
     "start": "",
-    "prestart": "cd server && yarn start &",
-    "poststart": "cd client && yarn start",
+    "prestart": "cd server && npm start &",
+    "poststart": "cd client && npm start",
     "build": "cd client && npm run build"
   },
   "license": "MIT"
