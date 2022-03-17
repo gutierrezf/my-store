@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Tabs, Tab } from "react-bootstrap";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import Select from "react-select";
 import moment from "moment";
 
 import MyCalendar, { IEvent, IEventTimeSlot } from "./calendar";
+import ListView from "./ListView/ListView";
 import { IAppointment } from "../../interfaces";
 import { FIND_PATIENTS } from "../Patients/graphql";
 import {
@@ -20,12 +21,12 @@ export interface IGraphqlAppointments {
 }
 
 export default function Home() {
+  const [tabView, setTabView] = useState("agenda");
   const [createAppointment] = useMutation(CREATE_APPOINTMENT);
   const [deleteAppointment] = useMutation(DELETE_APPOINTMENT);
   const { data } = useQuery<IGraphqlPatients>(FIND_PATIENTS);
-  const { data: appointmentData, refetch: refetchAppointments } = useQuery<
-    IGraphqlAppointments
-  >(FIND_APPOINTMENTS);
+  const { data: appointmentData, refetch: refetchAppointments } =
+    useQuery<IGraphqlAppointments>(FIND_APPOINTMENTS);
 
   const patients = data?.patients || [];
   const appointments =
@@ -85,11 +86,23 @@ export default function Home() {
 
   return (
     <div className="Home">
-      <MyCalendar
-        events={appointments}
-        onNewEvent={onNewEvent}
-        onSelectEvent={onAppointmentSelected}
-      />
+      <Tabs
+        id="controlled-tab-example"
+        activeKey={tabView}
+        onSelect={(k) => setTabView(`${k}`)}
+        className="mb-3"
+      >
+        <Tab eventKey="agenda" title="Agenda">
+          <MyCalendar
+            events={appointments}
+            onNewEvent={onNewEvent}
+            onSelectEvent={onAppointmentSelected}
+          />
+        </Tab>
+        <Tab eventKey="list" title="List">
+          <ListView appointments={appointments} />
+        </Tab>
+      </Tabs>
 
       <Modal
         size="lg"
